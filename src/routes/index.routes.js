@@ -4,7 +4,7 @@ import  express  from "express";
 const inderoutes= express.Router();
 
 import { UserService } from "../services/user.services.js";
-import  {verifyUser } from "../../middlewares/verifyUser.js";
+import  {verifyUser } from "../middlewares/verifyUser.js";
 
 inderoutes.post('/register/',UserService.RegisterUser);
 inderoutes.post('/login/',UserService.userSignin);
