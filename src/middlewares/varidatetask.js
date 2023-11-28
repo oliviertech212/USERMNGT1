@@ -1,0 +1,15 @@
+
+export const validate = (schema) => {
+    return(req,res,next) =>{
+        const {error} = schema.validate(req.body);
+        if(error){
+            const errorMsg = error.details[0].message.replace(/[/"]+/g, '');
+            console.log(errorMsg);
+            return res.status(401).json({
+                status:"fail",
+                message:errorMsg
+            });
+        }
+        next();
+    }
+};

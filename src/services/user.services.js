@@ -79,18 +79,20 @@ export class UserService {
     
         static async emailVerification  (req,res){
             try {
-              const user = await User.findOne({ _id: req.params.id });
+              const user = await User.findById(req.params.id);
+              console.log(user);
               if (!user) return res.status(400).send("Invalid link");
               const token = Jwt.verify(req.params.token, process.env.secret, async (err, usertoken) => {
                 if (err) res.status(403).json(`Token is not valid! ${err}`);
                if (user.id== usertoken.id && user) {
-                await User.updateOne({ _id: user._id,isEmailVerified: true });
+                await User.updateOne({id: user.id,isEmailVerified: true });
                 return  res.status(200).json({status:"success", message:"email verified sucessfully"});
                }
               });
               if (!token) return res.status(400).send("Invalid link");
           
             } catch (error) {
+                console.log();
               res.status(400).send("An error occured");
             }
         }

@@ -22,5 +22,39 @@ const userSchema= new mongoose.Schema({
 export const User = mongoose.model('User',userSchema);
 
 
+const taskSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  startDate: {
+    type: Date,
+    required: true,
+  },
+  endDate: {
+    type: Date,
+    required: true,
+  },
+  assignees: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User", 
+    },
+  ],
+  project: {
+    type: String, 
+  },
+  description: {
+    type: String,
+  },
+  priority: {
+    type: String,
+    enum: ["normal", "high", "medium"],
+    default: "normal",
+  },
+  fileAttachment: {
+    type: String, 
+  },
+});
 
-
+export const Task = mongoose.model("Task", taskSchema);
