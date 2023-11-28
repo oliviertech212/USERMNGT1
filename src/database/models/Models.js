@@ -7,15 +7,15 @@ import mongoose from "mongoose";
 const userSchema= new mongoose.Schema({
     email:{
         required: true,
-        type: 'string'
+        type: String
     },
     password:{
         required: true,
-        type:'string',
+        type:String,
         min:6
     },
    isEmailVerified:{
-    type:'boolean',
+    type:Boolean,
     default: false
    }
 });

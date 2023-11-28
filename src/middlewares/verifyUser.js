@@ -12,7 +12,6 @@ export const verifyUser= async (req, res, next) =>{
             next();
           });
         } 
-
         if(! authHeader) res.status(403).json(`user not found`);
         
         
